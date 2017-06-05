@@ -13,5 +13,10 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        nums_dictionary = dict(((n, i) for i, n in enumerate(nums)))
-        return next(((i, i+1) for i, num in enumerate(nums) if nums_dictionary.get(target-num, i) != i), None)
+        nums_dictionary = {}
+        for i, n in enumerate(nums):
+            m = target - n
+            if m in nums_dictionary:
+                return [nums_dictionary[m], i]
+            else:
+                nums_dictionary[n] = i
